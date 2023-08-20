@@ -69,16 +69,15 @@ if(isset($_POST["To_Excel"])){
         $dev_uid = $_POST['dev_sel'];
         $_SESSION['searchQuery'] .= " AND device_uid='".$dev_uid."'";
     }
-
     $sql = "SELECT * FROM users_logs WHERE ".$_SESSION['searchQuery']." ORDER BY id DESC";
     $result = mysqli_query($conn, $sql);
     if($result->num_rows > 0){
       $output .= '
-                  <table class="table" bordered="1">  
+                  <table class="table" bordered="5">  
                     <TR>
-                      <TH>ID</TH>
-                      <TH>Name</TH>
                       <TH>Serial Number</TH>
+                      <TH>Name</TH>
+                      <TH>ID</TH>
                       <TH>Card UID</TH>
                       <TH>Device ID</TH>
                       <TH>Device Dep</TH>
@@ -101,9 +100,10 @@ if(isset($_POST["To_Excel"])){
                         </TR>';
         }
         $output .= '</table>';
-        header('Content-Type: application/xls');
-        header('Content-Disposition: attachment; filename=User_Log'.$Start_date.'.xls');
-        
+        header("Content-type: application/x-msdownload"); 
+        header('Content-Disposition: attachment; filename="filename.xls"');
+        header("Pragma: no-cache");
+        header("Expires: 0");
         echo $output;
         exit();
     }

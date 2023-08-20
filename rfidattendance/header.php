@@ -103,6 +103,8 @@
 	      	<input type="email" name="up_email" placeholder="Enter your E-mail..." value="<?php echo $_SESSION['Admin-email']; ?>" required/><br>
 	      	<label for="User-psw"><b>Password</b></label>
 	      	<input type="password" name="up_pwd" placeholder="Enter your Password..." required/><br>
+			<label for="new-use-psw"><b>New Password</b></label>
+			<input type="password" name="up_newpwd" placeholder="Enter your new Password..." required /><br>
 	      </div>
 	      <div class="modal-footer">
 	        <button type="submit" name="update" class="btn btn-success">Save changes</button>

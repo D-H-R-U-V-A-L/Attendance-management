@@ -93,7 +93,7 @@ if (isset($_SESSION['Admin-name'])) {
           <input type="email" name="email" id="email" placeholder="E-mail..." required/>
           <input type="password" name="pwd" id="pwd" placeholder="Password" required/>
           <button type="submit" name="login" id="login">login</button>
-          <p class="message">Forgot your Password? <a href="#">Reset your password</a></p>
+          <!--<p class="message">Forgot your Password? <a href="#">Reset your password</a></p>-->
         </form>
       </div>
     </div>

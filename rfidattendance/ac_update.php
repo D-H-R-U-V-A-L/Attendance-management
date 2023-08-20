@@ -5,7 +5,7 @@ require('connectDB.php');
 if (isset($_POST['update'])) {
 
     $useremail = $_SESSION['Admin-email'];
-
+    $up_newpwd = $_POST['up_newpwd']; 
     $up_name = $_POST['up_name'];
     $up_email = $_POST['up_email'];
     $up_password =$_POST['up_pwd'];
@@ -45,14 +45,16 @@ if (isset($_POST['update'])) {
                 }
                 else if ($pwdCheck == true) {
                     if ($useremail == $up_email) {
-                        $sql = "UPDATE admin SET admin_name=? WHERE admin_email=?";
+                        $sql = "UPDATE admin SET admin_name=?,admin_pwd=? WHERE admin_email=?";
                         $stmt = mysqli_stmt_init($conn);
                         if (!mysqli_stmt_prepare($stmt, $sql)) {
                             header("location: index.php?error=sqlerror");
                             exit();
                         }
                         else{
-                            mysqli_stmt_bind_param($stmt, "ss", $up_name, $useremail);
+                            settype($up_newpwd,"string");
+                            $up_newpwd=password_hash($up_newpwd,PASSWORD_DEFAULT);
+                            mysqli_stmt_bind_param($stmt, "sss", $up_name,$up_newpwd, $useremail);
                             mysqli_stmt_execute($stmt);
                             $_SESSION['Admin-name'] = $up_name;
                             header("location: index.php?success=updated");
@@ -71,14 +73,16 @@ if (isset($_POST['update'])) {
                             mysqli_stmt_execute($result);
                             $resultl = mysqli_stmt_get_result($result);
                             if (!$row = mysqli_fetch_assoc($resultl)) {
-                                $sql = "UPDATE admin SET admin_name=?, admin_email=? WHERE admin_email=?";
+                                $sql = "UPDATE admin SET admin_name=?, admin_email=?,admin_pwd=? WHERE admin_email=?";
                                 $stmt = mysqli_stmt_init($conn);
                                 if (!mysqli_stmt_prepare($stmt, $sql)) {
                                     header("location: index.php?error=sqlerror");
                                     exit();
                                 }
                                 else{
-                                    mysqli_stmt_bind_param($stmt, "sss", $up_name, $up_email, $useremail);
+                                    settype($up_newpwd,"string");
+                                    $up_newpwd=password_hash($up_newpwd,PASSWORD_DEFAULT);
+                                    mysqli_stmt_bind_param($stmt, "ssss", $up_name, $up_email, $up_newpwd, $useremail);
                                     mysqli_stmt_execute($stmt);
                                     $_SESSION['Admin-name'] = $up_name;
                                     $_SESSION['Admin-email'] = $up_email;
