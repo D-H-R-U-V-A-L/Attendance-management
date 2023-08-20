@@ -55,7 +55,7 @@ if (!isset($_SESSION['Admin-name'])) {
 </head>
 <body>
 <?php include'header.php'; ?> 
-<section class="container py-lg-5">>
+<section class="container py-lg-5">
   <!--User table-->
     <h1 class="slideInDown animated">Here are the Users daily logs</h1>
     <div class="form-style-5">

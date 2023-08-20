@@ -1,7 +1,7 @@
 <?php  
 //Connect to database
 require 'connectDB.php';
-date_default_timezone_set('Asia/Damascus');
+date_default_timezone_set('Asia/Calcutta');
 $d = date("Y-m-d");
 $t = date("H:i:sa");
 
